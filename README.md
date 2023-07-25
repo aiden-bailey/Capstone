@@ -37,4 +37,4 @@ After cleaning, we had about 20,500 rows of a player's statistics in a given yea
 
 ## References
 
-- 
+- Kaggle data reference: https://www.kaggle.com/code/piyush1912/nba-top-players-deep-learning/notebook
