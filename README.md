@@ -27,6 +27,10 @@ After cleaning, we had about 20,500 rows of a player's statistics in a given yea
 
 ## Exploratory Data Analysis
 
+## Modelling
+
+## Conclusions and Model Limitations
+
 ## Contents/Todo
 
 - [X] Data Exploration
