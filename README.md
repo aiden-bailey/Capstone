@@ -1,6 +1,9 @@
 # NBA Career Prediction
 ------------------------
-## Executive Summary
+# Table of Contents
+- [Executive Summary](#first-point)
+------------------------
+## Executive Summary<a name="first-point"></a>
 
 This model attempts to predict whether or not a player in the National Basketball Association (NBA) will be a Hall of Fame player, good, average, or bad.
 - The 24,000 row dataset was downloaded off of Kaggle (reference below) that has information for each player in the NBA from 1950 to 2017.
