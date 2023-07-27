@@ -25,19 +25,13 @@ After the merged dataset was cleaned up, I then merged the cleaned dataset with 
 
 After cleaning, I had about 20,500 rows of a player's statistics in a given year.
 
-## Exploratory Data Analysis
+## Initial Exploratory Data Analysis (EDA)
 
-## Modelling
+First, EDA showed trends in points scored, shot percentages, rebounds, assists, and more over time. As rules, strategies and technology change, these statistics show that change. Points scored has increased significantly in recent years along with fouls. There is a near record low in minues played. 3-point shot attempts have increased significantly, particularly in the last 10 years being that it's doubled over that time. Some things haven't changed much. Average height and weight of players has stayed the same and field goal percentage has stayed the same.
 
-## Conclusions and Model Limitations
+Second, hall of fame status is the only binary indicator we initially had. So I ran multiple correlation heatmaps to see which variables correlated best with it. Since it's a binary column, there was "great" correlation numbers. However, the highest were points, win shares, and a tie between rebounds, minutes played, and turnovers. Assists were up there as well.
 
-## Contents/Todo
-
-- [X] Data Exploration
-- [X] Data Cleaning and Preprocessing
-- [ ] Exploratory Data Analysis
-- [ ] Modelling
-- [ ] Advanced Modelling
+Finally, initial EDA showed that choice of college didn't make a huge difference. The schools with the most number of Hall of Fame players are University of North Carolina and UCLA with 6 players each. Those two schools are historically good at basketball with two historic coaches having coached there in the 60s to the 80s. Outside of that, there were not many schools with multiple Hall of Fame players.
 
 ## References
 
