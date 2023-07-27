@@ -2,13 +2,17 @@
 ------------------------
 # Table of Contents
 - [Executive Summary](#first-point)
+- [Introduction](#second-point)
+- [Data Cleaning](#third-point)
+- [Initial Exploratory Data Analysis (EDA)](#fourth-point)
+- [References](#fifth-point)
 ------------------------
 ## Executive Summary<a name="first-point"></a>
 
 This model attempts to predict whether or not a player in the National Basketball Association (NBA) will be a Hall of Fame player, good, average, or bad.
 - The 24,000 row dataset was downloaded off of Kaggle (reference below) that has information for each player in the NBA from 1950 to 2017.
 
-## Introduction
+## Introduction<a name="second-point"></a>
 
 This model attempts to predict whether or not a player in the National Basketball Association (NBA) will be a Hall of Fame player, good, average, or bad.
 
@@ -18,7 +22,7 @@ Front office staff, scouts and coaches are the ones that experience this problem
 
 As explained above, categorical prediction will be method of choice. 
 
-## Data Cleaning
+## Data Cleaning<a name="third-point"></a>
 
 Three datasets were downloaded to create the final, clean dataset used in analysis. 
 
@@ -28,7 +32,7 @@ After the merged dataset was cleaned up, I then merged the cleaned dataset with 
 
 After cleaning, I had about 20,500 rows of a player's statistics in a given year.
 
-## Initial Exploratory Data Analysis (EDA)
+## Initial Exploratory Data Analysis (EDA)<a name="fourth-point"></a>
 
 EDA was done in Jupyter notebooks and Tableau. The notebook shows correlations, particularly with the `hall_of_fame` column. Tableau simply is showing relationships between variables.
 
@@ -38,6 +42,6 @@ Second, hall of fame status is the only binary indicator we initially had. So I 
 
 Finally, initial EDA showed that choice of college didn't make a huge difference. The schools with the most number of Hall of Fame players are University of North Carolina and UCLA with 6 players each. Those two schools are historically good at basketball with two historic coaches having coached there in the 60s to the 80s. Outside of that, there were not many schools with multiple Hall of Fame players.
 
-## References
+## References<a name="fifth-point"></a>
 
 - Kaggle data reference: https://www.kaggle.com/code/piyush1912/nba-top-players-deep-learning/notebook
