@@ -31,6 +31,8 @@ Two of them were information about each player. This includes name, height, weig
 
 After the merged dataset was cleaned up, I then merged the cleaned dataset with the season stats dataset. The season stats includes every player from every year that was in the NBA from 1950 to 2017. The season stats dataset includes 53 columns of information and statistics ranging from the common numbers like points, assists and rebounds to deeper statistics like player efficiency rating (PER), box plus/minus (BPM), and more. After lots of investigation, it became clear there was a noticeable difference in the statistics tracked before and after 1974. Many statistics weren't kept before then. If I had kept all rows, it would have resulted in deleting almost all of the statistics that weren't kept before 1974. Therefore, I excluded all rows before 1974 so we could keep the statistics.
 
+Finally, I converted all non-numeric columns to binary/dummy columns. For example, the college column was converted into dummy columns. This one specifically added about 300 columns. This was simply to see if any particular college correlated with hall of fame status. If not, they will be removed. The only non-numeric column left alone was name.
+
 After cleaning, I had about 20,500 rows of a player's statistics in a given year.
 
 ## Initial Exploratory Data Analysis (EDA)<a name="fourth-point"></a>
