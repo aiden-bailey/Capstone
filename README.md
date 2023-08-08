@@ -5,13 +5,15 @@
 - [Introduction](#second-point)
 - [Data Cleaning](#third-point)
 - [Initial Exploratory Data Analysis (EDA)](#fourth-point)
-- [Pre-Processing](#fifth-point)
-- [References](#sixth-point)
+- [Pre-Processing and Modeling](#fifth-point)
+- [Conclusion](#sixth-point)
+- [References](#seventh-point)
 ------------------------
 ## Executive Summary<a name="first-point"></a>
 
-This model will attempt to predict whether or not a player in the National Basketball Association (NBA) will be a superstar, good, average, or bad.
+This model will attempt to predict whether or not a player in the National Basketball Association (NBA) will be inducted into the Hall of Fame. While it isn't extremely relevant to know if a player will be inducted into the Hall of Fame after his career, it is extremely valuable to know which variables most contribute to a player's success.
 - The 24,000 row dataset was downloaded off of Kaggle (reference below) that has information for each player in the NBA from 1950 to 2017.
+- There were 3 datasets given that included information about each player and his statistics.
 
 ## Introduction<a name="second-point"></a>
 
@@ -45,12 +47,15 @@ Second, hall of fame status is the only binary indicator we initially had. So I 
 
 Finally, initial EDA showed that choice of college didn't make a huge difference. The schools with the most number of Hall of Fame players are University of North Carolina and UCLA with 6 players each. Those two schools are historically good at basketball with two historic coaches having coached there in the 60s to the 80s. Outside of that, there were not many schools with multiple Hall of Fame players. Further, I created dummy columns for each college listed (over 370 in total) and none of them had a significant correlation with hall of fame status. Therefore, I do not see any evidence indicating college has an impact.
 
-## Pre-Processing<a name="fifth-point"></a>
+## Pre-Processing and Modeling<a name="fifth-point"></a>
 
 In pre-processing, I chose to do a SelectKBest function to find the top features to use in my model. I believe the best number of features is 26. While there are better scores with an increasing number of features, I'd be worried about overfitting. There was a big jump in accuracy at 26 so I chose that one as the best. The accuracy score was about 95.7%.
 
 I also chose to do PCA. The best PCA score plateaued around 96.25%. At about 46 components there was a large gap between train and test data with test data doing better. Therefore, 46 components is what I chose.
 
-## References<a name="sixth-point"></a>
+## Conclusion<a name="sixth-point"></a>
+
+
+## References<a name="seventh-point"></a>
 
 - Kaggle data reference: https://www.kaggle.com/code/piyush1912/nba-top-players-deep-learning/notebook
