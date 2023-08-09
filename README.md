@@ -11,7 +11,7 @@
 ------------------------
 ## Executive Summary<a name="first-point"></a>
 
-This model will attempt to predict whether or not a player in the National Basketball Association (NBA) will be inducted into the Hall of Fame. While it isn't extremely relevant to know if a player will be inducted into the Hall of Fame after his career, it is extremely valuable to know which variables most contribute to a player's success.
+This model will attempt to predict whether or not a player in the National Basketball Association (NBA) will be inducted into the Hall of Fame (HOF). While it isn't extremely relevant to know if a player will be inducted into the Hall of Fame after his career, it is extremely valuable to know which variables most contribute to a player's success.
 - The 24,000 row dataset was downloaded off of Kaggle (reference below) that has information for each player in the NBA from 1950 to 2017.
 - There were 3 datasets given that included information about each player and his statistics.
 
@@ -36,6 +36,8 @@ After the merged dataset was cleaned up, I then merged the cleaned dataset with 
 Finally, I converted all non-numeric columns to binary/dummy columns. For example, the college column was converted into dummy columns. This one specifically added about 300 columns. This was simply to see if any particular college correlated with hall of fame status. If not, they will be removed. The only non-numeric column left alone was name.
 
 After cleaning, I had about 20,500 rows of a player's statistics in a given year.
+
+I debated adding things like awards and championships. However, after some thinking, I decided not to. It may seem like the wrong choice since awards and championships certainly contribute to HOF status, there is no debate there. Great players win championships, end of story. However, my goal is to predict what metrics make players great. Awards and championships are biproducts of other metrics like points, blocks, assists, etc. They're even biproducts of advanced metrics like win shares (WS), value over replacement player (VORP), etc. Therefore, in order to help teams find/create good players, it would not be helpful to tell them to make a player better by winning championships or awards, that's obvious. Teams want to know what to focus on in order to get there. Therefore, you will not see awards and championships considered here.
 
 ## Initial Exploratory Data Analysis (EDA)<a name="fourth-point"></a>
 
