@@ -51,6 +51,22 @@ Finally, initial EDA showed that choice of college didn't make a huge difference
 
 Before pre-processing, I created a seperate dataframe that removed players whose `year_end` was greater than 2012. This was to remove players who potentially could be current players who were not eligible for the HOF when this dataset was made. After doing that, I found that about 3.2% of players were inducted into the Hall of Fame, therefore, 96.8% of players were not. This means my model needs to have an accuracy score better than 96.8% to show that the model can do better than chance.
 
+To get a good idea of the features that most impact Hall of Fame status, I used SelectKBest to get the top 30 features. The following were in the top 10:
+1. VORP
+2. WS
+3. FTA
+4. FT
+5. OWS
+6. 2P
+7. PTS
+8. FG
+9. 2PA
+10. DWS
+
+It's interesting to see simple categories such as points and free throws in here while more mathematically complex numbers like VORP and WS in here as well. It's worth noting that VORP is by far the highest with WS easily coming in second as well.
+
+While 3-point shots are increasing and are relatively new to the game (at least in the volume it's currently at), it's worth noting that right now, there are no features in the top 30 that are related to 3-point shots. I believe this will change over time, but currently it doesn't make a major impact. For "basic" numbers, points are the theme. Players that score more points have a better chance of making it into the Hall of Fame.
+
 I did a pipeline and grid search comparing the following:
 - Scalers: Standard and MinMax
 - Feature Engineering: PCA and SelectKBest
@@ -61,7 +77,12 @@ After running this through a grid search, the best performing value was SVC, C=1
 
 ## Conclusion<a name="sixth-point"></a>
 
+Overall, my model performed well but certainly has limitations:
+- With recent players have a lesser chance at making it into the HOF than older players, that may skew these results.
+- Our model is overfit.
+- The top 30 best features include things like `minutes_played` and `games_started`. These things are likely a result of other features doing well like points scored. Players get more minutes in a game when they score more points in the minutes they do play. Therefore, it's somewhat circular reasoning. It's worth noting that as we evluate the features that are predictors of great players.
 
+For teams looking for in-game numbers to go by in choosing players to add to their team, points scored are the highest predictors of Hall of Fame status. After that it's rebounds, steals, assists, blocks, then fouls. So I'd recommend teams find players that emmulate this type of play.
 
 ## References<a name="seventh-point"></a>
 
