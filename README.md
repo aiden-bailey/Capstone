@@ -49,11 +49,18 @@ Finally, initial EDA showed that choice of college didn't make a huge difference
 
 ## Pre-Processing and Modeling<a name="fifth-point"></a>
 
-In pre-processing, I chose to do a SelectKBest function to find the top features to use in my model. I believe the best number of features is 26. While there are better scores with an increasing number of features, I'd be worried about overfitting. There was a big jump in accuracy at 26 so I chose that one as the best. The accuracy score was about 95.7%.
+Before pre-processing, I created a seperate dataframe that removed players whose `year_end` was greater than 2012. This was to remove players who potentially could be current players who were not eligible for the HOF when this dataset was made. After doing that, I found that about 3.2% of players were inducted into the Hall of Fame, therefore, 96.8% of players were not. This means my model needs to have an accuracy score better than 96.8% to show that the model can do better than chance.
 
-I also chose to do PCA. The best PCA score plateaued around 96.25%. At about 46 components there was a large gap between train and test data with test data doing better. Therefore, 46 components is what I chose.
+I did a pipeline and grid search comparing the following:
+- Scalers: Standard and MinMax
+- Feature Engineering: PCA and SelectKBest
+- Models: LogisticRegression, DecisionTreeClassifier, and SVC
+- Hyperparameters: n_components (PCA), k features (SelectKBest), C-value (Logistic and SVC), kernel (SVC), and max_depth (DecisionTree)
+
+After running this through a grid search, the best performing value was SVC, C=1000, kernel='rbf', PCA, n_components=30, StandardScaler. When running this model, it gave a train score of 1 and a test score of 0.99. While there is certainly evidence of overfitting, the test score still performed at a high accuracy rate.
 
 ## Conclusion<a name="sixth-point"></a>
+
 
 
 ## References<a name="seventh-point"></a>
