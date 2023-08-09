@@ -17,7 +17,7 @@ This model will attempt to predict whether or not a player in the National Baske
 
 ## Introduction<a name="second-point"></a>
 
-This model attempts to predict whether or not a player in the National Basketball Association (NBA) will be a Hall of Fame player, good, average, or bad.
+This model attempts to predict whether or not a player in the National Basketball Association (NBA) will be a Hall of Fame player. The goal is to find the features that most contribute toward a player's success so that teams can know which metrics to value.
 
 Every team, in one way or another, tries to predict the performance of player, particularly for players that are young or said to have a lot of potential. The goal would be to add a player to a team that will help them win now, but especially in the future. If that can be predicted, it will allow a team to do what every team sets out to do each year: win a championship.
 
