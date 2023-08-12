@@ -75,7 +75,16 @@ I did a pipeline and grid search comparing the following:
 - Models: LogisticRegression, DecisionTreeClassifier, and SVC
 - Hyperparameters: n_components (PCA), k features (SelectKBest), C-value (Logistic and SVC), kernel (SVC), and max_depth (DecisionTree)
 
-After running this through a grid search, the best performing value was SVC, C=1000, kernel='rbf', PCA, n_components=30, StandardScaler. When running this model, it gave a train score of 1 and a test score of 0.99. While there is certainly evidence of overfitting, the test score still performed at a high accuracy rate.
+After running this through a grid search, the best performing value was SVC, C=1, kernel='poly', PCA, n_components=5, MinMaxScaler. When running this model, it gave a train score of 0.986 and a test score of 0.984. While there is evidence of slight overfitting, the test score still performed at a high accuracy rate.
+
+When evaluating recall and precision, I believe precision is the more valuable of the two. This is because I don't want to have too many false positives, as the model would overvalue players who are not Hall of Fame caliber. Since the goal is to show teams the things that matter in a player's on-court success, I want to make sure precision is high rather than recall.
+
+My precision score was 0.86 and recall was 0.40. Below illustrates the trade-off between the two based on the threshold in predictions:
+![image](https://github.com/aiden-bailey/Capstone/assets/127895132/0c4babb3-930b-4323-8cec-ac76f5cc0637)
+
+As you can see, recall never reaches a high value without severe decreases in precision. Therefore, I chose to leave the threshold at 0.50.
+
+It's worth noting that I considered changing the stats to a per-game basis. However, after running models on that, the performance was worse. I believe this is because it overvalues players who had short careers but performed at relatively high levels. However, these levels weren't sustainable for these players and they did not end up having "great" careers. Therefore, I do not believe we should change the columns to a per-game basis.
 
 ## Conclusion<a name="sixth-point"></a>
 
@@ -85,6 +94,12 @@ Overall, my model performed well but certainly has limitations:
 - The top 30 best features include things like `minutes_played` and `games_started`. These things are likely a result of other features doing well like points scored. Players get more minutes in a game when they score more points in the minutes they do play. Therefore, it's somewhat circular reasoning. It's worth noting that as we evluate the features that are predictors of great players.
 
 For teams looking for in-game numbers to go by in choosing players to add to their team, points scored are the highest predictors of Hall of Fame status. After that it's rebounds, steals, assists, blocks, then fouls. So I'd recommend teams find players that emmulate this type of play.
+
+Overall, our model does what we need it to do. Its accuracy of 98.4% is better than chance. The precision is high at the expense of recall.
+
+The limitations of this model (and any model most likely) is the inconsistency of why players are inducted into the hall of fame. Some on their in-game play, some simply on winning many championships, some on being the first to do something, and the list goes on. Since our goal was to help teams figure out what makes players successful on the court, I believe we achieved what we desired.
+
+We will miss some players in our predictions, but we can be confident that those we predict as hall of fame caliber are almost certainly that. Therefore, we can examine what makes these players successful and translate that into recruiting and building up players to be successful with their teams.
 
 ## References<a name="seventh-point"></a>
 
