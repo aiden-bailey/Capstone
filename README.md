@@ -80,6 +80,7 @@ After running this through a grid search, the best performing value was SVC, C=1
 When evaluating recall and precision, I believe precision is the more valuable of the two. This is because I don't want to have too many false positives, as the model would overvalue players who are not Hall of Fame caliber. Since the goal is to show teams the things that matter in a player's on-court success, I want to make sure precision is high rather than recall.
 
 My precision score was 0.86 and recall was 0.40. Below illustrates the trade-off between the two based on the threshold in predictions:
+
 ![image](https://github.com/aiden-bailey/Capstone/assets/127895132/0c4babb3-930b-4323-8cec-ac76f5cc0637)
 
 As you can see, recall never reaches a high value without severe decreases in precision. Therefore, I chose to leave the threshold at 0.50.
