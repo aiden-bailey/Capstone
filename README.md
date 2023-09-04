@@ -11,13 +11,13 @@
 ------------------------
 ## Executive Summary<a name="first-point"></a>
 
-This model will attempt to predict whether or not a player in the National Basketball Association (NBA) will be inducted into the Hall of Fame (HOF). While it isn't extremely relevant to know if a player will be inducted into the Hall of Fame after his career, it is extremely valuable to know which variables most contribute to a player's success.
+This model will attempt to predict whether or not a player in the National Basketball Association (NBA) will have made an All-NBA team. Ultimately, we want to know what in-game and advanced statistics should a team focus on when looking for a player to add to their team. While a player can be first team, second team or third team All-NBA, this model simply seeks to predict if a player made any of them in their career.
 - The 24,000 row dataset was downloaded off of Kaggle (reference below) that has information for each player in the NBA from 1950 to 2017.
 - There were 3 datasets given that included information about each player and his statistics.
 
 ## Introduction<a name="second-point"></a>
 
-This model attempts to predict whether or not a player in the National Basketball Association (NBA) will be a Hall of Fame player. The goal is to find the features that most contribute toward a player's success so that teams can know which metrics to value.
+This model attempts to predict whether or not a player in the National Basketball Association (NBA) will has a statline that predicts if he made an All-NBA team. The goal is to find the features that most contribute toward a player's success so that teams can know which metrics to value.
 
 Every team, in one way or another, tries to predict the performance of player, particularly for players that are young or said to have a lot of potential. The goal would be to add a player to a team that will help them win now, but especially in the future. If that can be predicted, it will allow a team to do what every team sets out to do each year: win a championship.
 
@@ -33,7 +33,9 @@ Two of them were information about each player. This includes name, height, weig
 
 After the merged dataset was cleaned up, I then merged the cleaned dataset with the season stats dataset. The season stats includes every player from every year that was in the NBA from 1950 to 2017. The season stats dataset includes 53 columns of information and statistics ranging from the common numbers like points, assists and rebounds to deeper statistics like player efficiency rating (PER), box plus/minus (BPM), and more. After lots of investigation, it became clear there was a noticeable difference in the statistics tracked before and after 1974. Many statistics weren't kept before then. If I had kept all rows, it would have resulted in deleting almost all of the statistics that weren't kept before 1974. Therefore, I excluded all rows before 1974 so we could keep the statistics.
 
-Finally, I converted all non-numeric columns to binary/dummy columns. For example, the college column was converted into dummy columns. This one specifically added about 300 columns. This was simply to see if any particular college correlated with hall of fame status. If not, they will be removed. The only non-numeric column left alone was name.
+Third, I converted all non-numeric columns to binary/dummy columns. For example, the college column was converted into dummy columns. This one specifically added about 300 columns. This was simply to see if any particular college correlated with hall of fame status. If not, they will be removed. The only non-numeric column left alone was name.
+
+Finally, I had to add the target column indicating whether a player had made an All-NBA team. I was able to find a table online, copied its contents into my notebook, and added them as a column to my dataframe (this occurred in my Preprocessing Notebook). I then changed the column to binary with 1 indicating a player made at least one All-NBA team in their career.
 
 After cleaning, I had about 20,500 rows of a player's statistics in a given year.
 
@@ -41,7 +43,7 @@ I debated adding things like awards and championships. However, after some think
 
 ## Initial Exploratory Data Analysis (EDA)<a name="fourth-point"></a>
 
-EDA was done in Jupyter notebooks and Tableau. The notebook shows correlations, particularly with the `hall_of_fame` column. Tableau simply is showing relationships between variables.
+EDA was done in Jupyter notebooks and Tableau. The notebook shows correlations, particularly with the `all_nba_selections` column. Tableau simply is showing relationships between variables.
 
 First, EDA showed trends in points scored, shot percentages, rebounds, assists, and more over time. As rules, strategies and technology change, these statistics show that change. Points scored has increased significantly in recent years along with fouls. There is a near record low in minues played. 3-point shot attempts have increased significantly, particularly in the last 10 years being that it's doubled over that time. Some things haven't changed much. Average height and weight of players has stayed the same and field goal percentage has stayed the same.
 
@@ -59,15 +61,17 @@ To get a good idea of the features that most impact Hall of Fame status, I used 
 3. FTA
 4. FT
 5. OWS
-6. 2P
-7. PTS
-8. FG
-9. 2PA
-10. DWS
+6. PTS
+7. FG
+8. 2P
+9. FGA
+10. 2PA
 
 It's interesting to see simple categories such as points and free throws in here while more mathematically complex numbers like VORP and WS in here as well. It's worth noting that VORP is by far the highest with WS easily coming in second as well.
 
-While 3-point shots are increasing and are relatively new to the game (at least in the volume it's currently at), it's worth noting that right now, there are no features in the top 30 that are related to 3-point shots. I believe this will change over time, but currently it doesn't make a major impact. For "basic" numbers, points are the theme. Players that score more points have a better chance of making it into the Hall of Fame.
+As a quick side-note, VORP stands for Value Over Replacement Player. This is a box score estimate of the points per 100 team possessions that a player contributed above a replacement-level player (-2.0). WS stands for Win Shares. This is an estimate of the number of wins contributed by a player. For both, the higher, the better.
+
+While 3-point shots are increasing and are relatively new to the game (at least in the volume it's currently at), it's worth noting that right now, there are only two features in the top 30 that are related to 3-point shots, but they are at the very bottom (28 and 29). I believe this will change over time, but currently it doesn't make a major impact. For "basic" numbers, points are the theme. Players that score more points have a better chance of making an All-NBA team. The next "basic" numbers that matter are rebounds and assists, in that order.
 
 I did a pipeline and grid search comparing the following:
 - Scalers: Standard and MinMax
@@ -75,30 +79,28 @@ I did a pipeline and grid search comparing the following:
 - Models: LogisticRegression, DecisionTreeClassifier, and SVC
 - Hyperparameters: n_components (PCA), k features (SelectKBest), C-value (Logistic and SVC), kernel (SVC), and max_depth (DecisionTree)
 
-After running this through a grid search, the best performing value was SVC, C=1, kernel='poly', PCA, n_components=5, MinMaxScaler. When running this model, it gave a train score of 0.986 and a test score of 0.984. While there is evidence of slight overfitting, the test score still performed at a high accuracy rate.
+After running this through a grid search and doing further model comparisons, the best performing value was Logistic Regression, C=1, SelectKBest, k=7, Standard Scaler. When running this model, it gave a test score of 0.978. Since 94.2% of players don't make an All-NBA team, a 97.8% score is good and better than chance.
 
 When evaluating recall and precision, I believe precision is the more valuable of the two. This is because I don't want to have too many false positives, as the model would overvalue players who are not Hall of Fame caliber. Since the goal is to show teams the things that matter in a player's on-court success, I want to make sure precision is high rather than recall.
 
-My precision score was 0.86 and recall was 0.40. Below illustrates the trade-off between the two based on the threshold in predictions:
+My precision score was 0.86 and recall was 0.67. Below illustrates the trade-off between the two based on the threshold in predictions:
 
-![image](https://github.com/aiden-bailey/Capstone/assets/127895132/0c4babb3-930b-4323-8cec-ac76f5cc0637)
+![image](https://github.com/aiden-bailey/Capstone/assets/127895132/92ce80e6-c2cb-49ba-b65b-810153fd1346)
 
 As you can see, recall never reaches a high value without severe decreases in precision. Therefore, I chose to leave the threshold at 0.50.
 
-It's worth noting that I considered changing the stats to a per-game basis. However, after running models on that, the performance was worse. I believe this is because it overvalues players who had short careers but performed at relatively high levels. However, these levels weren't sustainable for these players and they did not end up having "great" careers. Therefore, I do not believe we should change the columns to a per-game basis.
+It's worth noting that these stats are on a per-game basis. This helped the model perform slightly better and makes the findings more applicable.
 
 ## Conclusion<a name="sixth-point"></a>
 
 Overall, my model performed well but certainly has limitations:
-- With recent players have a lesser chance at making it into the HOF than older players, that may skew these results.
-- Our model is overfit.
+- More recent players may not have had time to develop their skills long enough to make an All-NBA team.
 - The top 30 best features include things like `minutes_played` and `games_started`. These things are likely a result of other features doing well like points scored. Players get more minutes in a game when they score more points in the minutes they do play. Therefore, it's somewhat circular reasoning. It's worth noting that as we evluate the features that are predictors of great players.
+- Players that made only 1 All-NBA teams in their career may have had an outlier of a year for them. So this can mess with the performance of the model quite drastically.
 
-For teams looking for in-game numbers to go by in choosing players to add to their team, points scored are the highest predictors of Hall of Fame status. After that it's rebounds, steals, assists, blocks, then fouls. So I'd recommend teams find players that emmulate this type of play.
+For teams looking for in-game numbers to go by in choosing players to add to their team, points scored are the highest predictors of All-NBA status. After that it's rebounds, assists, steals, blocks, then fouls. So I'd recommend teams find players that emmulate this type of play.
 
-Overall, our model does what we need it to do. Its accuracy of 98.4% is better than chance. The precision is high at the expense of recall.
-
-The limitations of this model (and any model most likely) is the inconsistency of why players are inducted into the hall of fame. Some on their in-game play, some simply on winning many championships, some on being the first to do something, and the list goes on. Since our goal was to help teams figure out what makes players successful on the court, I believe we achieved what we desired.
+Overall, our model does what we need it to do. Its accuracy of 97.8% is better than chance. The precision is high at the expense of recall.
 
 We will miss some players in our predictions, but we can be confident that those we predict as hall of fame caliber are almost certainly that. Therefore, we can examine what makes these players successful and translate that into recruiting and building up players to be successful with their teams.
 
