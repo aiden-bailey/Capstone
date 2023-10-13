@@ -85,7 +85,8 @@ When evaluating recall and precision, I believe precision is the more valuable o
 
 My precision score was 0.86 and recall was 0.67. Below illustrates the trade-off between the two based on the threshold in predictions:
 
-![image](https://github.com/aiden-bailey/Capstone/assets/127895132/0a7bcb9c-99ce-46a9-9882-70f327d26183)
+![download (5)](https://github.com/aiden-bailey/Capstone/assets/127895132/4c2d3c59-a0ea-4750-ab3b-6a34f3d98b95)
+
 
 As you can see, recall never reaches a high value without severe decreases in precision. Therefore, I chose to leave the threshold at 0.50.
 
